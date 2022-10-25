@@ -267,8 +267,22 @@ void Node<T>::preOrder(std::stringstream &aux) const {
 // =================================================================
 template <class T>
 uint Node<T>::leaves() const {
-	//TO DO
-	return 0;
+	uint count = 0;
+
+	if (left != NULL) {
+		count += left->leaves();
+	}
+
+	if (right != NULL) {
+		count += right->leaves();
+	}
+
+	if (left == NULL && right == NULL) {
+		count++;
+	}
+
+	return count;
+
 }
 
 // =================================================================
@@ -280,8 +294,23 @@ uint Node<T>::leaves() const {
 // =================================================================
 template <class T>
 uint Node<T>::depth() const {
-	//TO DO
-	return 0;
+	uint leftDepth = 0;
+	uint rightDepth = 0;
+
+	if (left != NULL) {
+		leftDepth = left->depth();
+	}
+
+	if (right != NULL) {
+		rightDepth = right->depth();
+	}
+
+	if (leftDepth > rightDepth) {
+		return leftDepth + 1;
+	} else {
+		return rightDepth + 1;
+	}
+
 }
 
 // =================================================================
@@ -293,7 +322,16 @@ uint Node<T>::depth() const {
 // =================================================================
 template <class T>
 bool Node<T>::isFull() const {
-	//TO DO
+	if (left == NULL && right == NULL) {
+		return true;
+	}
+
+	if (left != NULL && right != NULL) {
+		if (left->depth() == right->depth()) {
+			return left->isFull() && right->isFull();
+		}
+	}
+
 	return false;
 }
 
@@ -306,7 +344,28 @@ bool Node<T>::isFull() const {
 // =================================================================
 template <class T>
 T Node<T>::ancestor(T val) const {
-	//TO DO
+	if(*this == val) {
+		throw NoSuchElement();
+	}
+
+	if (val < value) {
+		if (left != NULL) {
+			if (left->value == val) {
+				return value;
+			} else {
+				return left->ancestor(val);
+			}
+		}
+	} else if (val > value) {
+		if (right != NULL) {
+			if (right->value == val) {
+				return value;
+			} else {
+				return right->ancestor(val);
+			}
+		}
+	}
+
 	return T();
 }
 
@@ -490,7 +549,7 @@ std::string BST<T>::byLevel() const {
 
 	aux << "[";
 	if (!empty()) {
-		// TO DO
+		//TO DO
 	}
 	aux << "]";
 	return aux.str();
