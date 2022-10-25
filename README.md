@@ -6,8 +6,8 @@ En este repositorio encontrarás el archivo "bst.h" que deberás modificar para 
 ```
 // =========================================================
 // File: bst.h
-// Author: Edward Elric - A00123456
-// Date: 01/01/2021
+// Author: Daniel Hurtado - A01707774
+// Date: 24/10/2022
 // =========================================================
 ```
 Diseña e implementa, en forma <span style="text-decoration-line: underline;">forma individual</span>, las funciones que resuelvan los problemas que se describen a continuación.
