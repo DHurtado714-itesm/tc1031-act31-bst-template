@@ -344,9 +344,6 @@ bool Node<T>::isFull() const {
 // =================================================================
 template <class T>
 T Node<T>::ancestor(T val) const {
-	if(*this == val) {
-		throw NoSuchElement();
-	}
 
 	if (val < value) {
 		if (left != NULL) {
@@ -366,7 +363,7 @@ T Node<T>::ancestor(T val) const {
 		}
 	}
 
-	return T();
+	throw NoSuchElement();
 }
 
 // =================================================================
@@ -548,9 +545,21 @@ std::string BST<T>::byLevel() const {
 	std::stringstream aux;
 
 	aux << "[";
-	if (!empty()) {
-		//TO DO
+	if (root == NULL) {
+		aux << "]";
+		return aux.str();
 	}
+	if(root->left == NULL && root->right == NULL) {
+		aux << root->value;
+		return aux.str();
+	}
+	if (root->left != NULL) {
+		aux << root->left->value << ", ";
+	}
+	if (root->right != NULL) {
+		aux << root->right->value << ", ";
+	}
+
 	aux << "]";
 	return aux.str();
 }
