@@ -263,6 +263,8 @@ void Node<T>::preOrder(std::stringstream &aux) const {
 // Returns how many leaves are below the current node. Remember that
 // a node without children is a leaf.
 //
+// Complexity: O(n) 
+//
 // @return the number of leaves below the current node.
 // =================================================================
 template <class T>
@@ -289,6 +291,8 @@ uint Node<T>::leaves() const {
 // Returns the depth of the node. Remember that the depth of a node
 // is defined as the greater depth of both children plus 1. If it is
 //	a leaf, it returns 1.
+//
+// Complexity: O(n)
 //
 // @return the depth of the node.
 // =================================================================
@@ -318,6 +322,8 @@ uint Node<T>::depth() const {
 // a) it is a leaf, b) they have both children, both children are
 // full and both children have the same depth.
 //
+// Complexity: O(n)
+// 
 // @return true if the node is complete, false otherwise.
 // =================================================================
 template <class T>
@@ -337,6 +343,8 @@ bool Node<T>::isFull() const {
 
 // =================================================================
 // Returns the ancestors (parent) of the value * val *.
+//
+// Complexity: O(n)
 //
 // @return the ancestor (father) of * val *.
 // @throw NoSuchElement if the * val * element is not inside the
@@ -553,13 +561,10 @@ std::string BST<T>::byLevel() const {
 		aux << root->value;
 		return aux.str();
 	}
-	if (root->left != NULL) {
-		aux << root->left->value << ", ";
+	if(root->left != NULL && root->right != NULL){
+		aux << root->left->value << ", " << root->right->value;
 	}
-	if (root->right != NULL) {
-		aux << root->right->value << ", ";
-	}
-
+	
 	aux << "]";
 	return aux.str();
 }
